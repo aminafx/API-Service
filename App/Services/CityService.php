@@ -1,10 +1,12 @@
 <?php
+namespace App\Services;
 
 class CityService
 {
-    public function getCities()
-    {
-        echo 'this is city';
+
+    function getCities($data = null){
+
+        return ['c1','c2','c3'];
     }
     public function createCities()
     {

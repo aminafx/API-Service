@@ -100,7 +100,7 @@ function deleteProvince($province_id){
 // Function Tests
 // $data = addCity(['province_id' => 23,'name' => "Loghman Shahr"]);
 // $data = addProvince(['name' => "7Learn"]);
- $data = getCities(['province_id' => 23]);
+// $data = getCities(['province_id' => 23]);
 // $data = deleteProvince(34);
 // $data = changeProvinceName(34,"سون لرن");
 // $data = getProvinces();
@@ -108,6 +108,6 @@ function deleteProvince($province_id){
 // $data = changeCityName(445,"لقمان شهر");
 // $data = getCities(['province_id' => 1]);
 // $data = json_encode($data);
- echo "<pre>";
- print_r($data);
- echo "<pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "<pre>";
