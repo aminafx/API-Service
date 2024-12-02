@@ -1,24 +1,29 @@
 <?php
+
 namespace App\Services;
 
 class ProvinceService
 {
 
-    function getProvinces($data = null){
+    function getProvinces($data = null)
+    {
 
-        return ['c1','c2','c3'];
+        return getProvinces($data);
     }
-    public function createProvinces()
+
+    public function createProvince($data)
     {
-        echo 'this is creates cities';
+        return addProvince($data);
     }
-    public function updateProvinces()
+
+    public function updateProvince($province_id, $name)
     {
-        echo 'this is creates cities';
+        return changeProvinceName($province_id, $name);
     }
-    public function deleteProvinces()
+
+    public function deleteProvince($province_id)
     {
-        echo 'this is creates cities';
+        return deleteProvince($province_id);
     }
 
 }

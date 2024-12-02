@@ -1,24 +1,31 @@
 <?php
+
 namespace App\Services;
 
 class CityService
 {
 
-    function getCities($data = null){
+    public function getCities($data = null)
+    {
 
-        return ['c1','c2','c3'];
+        return getCities($data);
     }
-    public function createCities()
+
+    public function createCity($data)
     {
-        echo 'this is creates cities';
+        return addCity($data);
     }
-    public function updateCities()
+
+    public function updateCity($city_id, $name)
     {
-        echo 'this is creates cities';
+        return changeCityName($city_id, $name);
+
     }
-    public function deleteCities()
+
+    public function deleteCity($city_id)
     {
-        echo 'this is creates cities';
+        return deleteCity($city_id);
+
     }
 
 }
