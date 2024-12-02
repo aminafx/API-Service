@@ -7,8 +7,19 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 
 # GET METHOD
 if( $request_method=='GET'){
+    $page = $_GET['page'] ?? null;
+    $page_size = $_GET['page_size'] ?? null;
+    $validate= new Validator();
+     if(!$validate->is_valid_pagination($page,$page_size)){
+         Response::respondAndDie("Pagination Gone Wrong", Response::HTTP_NOT_FOUND);
+
+     };
     $province_service = new ProvinceService();
-    $result = $province_service->getProvinces();
+    $request_data = [
+        'page'=>$page,
+        'page_size'=>$page_size,
+    ];
+    $result = $province_service->getProvinces($request_data);
     Response::respondAndDie($result,Response::HTTP_OK);
 }
 

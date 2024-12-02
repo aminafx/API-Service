@@ -12,15 +12,16 @@ if ($request_method == 'GET') {
 
 
     $province_id = $_GET['province_id'] ?? null;
+    $page = $_GET['page'] ?? null;
+    $page_size = $_GET['page_size'] ?? null;
     $validate = new Validator();
-    if ($province_id != null) {
-        if (!$validate->is_valid_province($province_id)) {
+        if (!$validate->cityGetRequestValidation($_GET)) {
             Response::respondAndDie("Province Not Found", Response::HTTP_NOT_FOUND);
-
         }
-    }
     $request_data = [
-        'province_id' => $province_id
+        'province_id' => $province_id,
+        'page'=>$page,
+        'page_size'=>$page_size,
     ];
     $city_service = new CityService();
     $result = $city_service->getCities($request_data);

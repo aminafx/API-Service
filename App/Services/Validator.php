@@ -20,6 +20,7 @@ class Validator
 //        } else {
 //            return false;
 //        }
+
         if (is_numeric($province_id)) {
 
             global $pdo;
@@ -58,6 +59,57 @@ class Validator
 
             return false;
         }
+    }
+
+    public function is_valid_pagination($page, $page_size)
+    {
+
+        if (isset($page) && isset($page_size) and
+            !empty($page) &&!empty($page_size)) {
+
+
+            if (is_numeric($page) && $page > 0 and
+                is_numeric($page_size) && $page_size > 0) {
+
+                return true;
+            }  else {
+
+                return false;
+            }
+        }elseif ($page == null && $page_size == null) {
+
+            return true;
+        }
+    }
+
+    public function cityGetRequestValidation($data)
+    {
+
+        $province_id = $data['province_id'] ?? null;
+        $page = $data['page'] ?? null;
+        $page_size = $data['page_size'] ?? null;
+
+
+        if (!empty($data)) {
+
+            if (isset($province_id) or !empty($province_id)) {
+
+                if ($this->is_valid_province($province_id)) {
+
+                    return $this->is_valid_pagination($page, $page_size);
+                } else {
+                    return false;
+                }
+            } else {
+
+                return $this->is_valid_pagination($page, $page_size);
+            }
+
+        } else {
+
+            return true;
+        }
+
     }
 
     public function cityPostRequestValidation($data)
@@ -144,6 +196,7 @@ class Validator
         }
 
     }
+
     public function provinceDeleteRequestValidation($province_id)
     {
 
