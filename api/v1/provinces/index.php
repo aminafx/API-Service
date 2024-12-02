@@ -17,7 +17,7 @@ if( $request_method=='GET'){
 elseif( $request_method=='POST'){
     $result =(array) json_decode(file_get_contents('php://input'));
     $validate = new Validator();
-    if(!$validate->ProvincePostRequestValidation($result['name'])){
+    if(!$validate->provincePostRequestValidation($result['name'])){
         Response::respondAndDie("Name Is Not Valid", Response::HTTP_NOT_FOUND);
     }
     $province_service = new ProvinceService();
@@ -32,7 +32,7 @@ elseif( $request_method=='PUT'){
 
     $result  = json_decode(file_get_contents("php://input"),true);
     $validate = new Validator();
-    if(!$validate->ProvincePutRequestValidation($result)){
+    if(!$validate->provincePutRequestValidation($result)){
         Response::respondAndDie("Province Not Found", Response::HTTP_NOT_FOUND);
 
     };

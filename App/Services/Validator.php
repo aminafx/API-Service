@@ -115,14 +115,14 @@ class Validator
         }
     }
 
-    public function ProvincePostRequestValidation($name)
+    public function provincePostRequestValidation($name)
     {
         if (!empty($name)) {
             return $this->is_valid_name($name);
         }
     }
 
-    public function ProvincePutRequestValidation($data)
+    public function provincePutRequestValidation($data)
     {
         if (!$data == null) {
             $province_id = $data['province_id'];
