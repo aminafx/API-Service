@@ -3,10 +3,13 @@ include "../../../autoloader.php";
 use App\Utilities\Response;
 use App\Services\ProvinceService;
 use App\Services\Validator;
+use App\Utilities\CacheUtility;
+
 $request_method = $_SERVER['REQUEST_METHOD'];
 
 # GET METHOD
 if( $request_method=='GET'){
+    CacheUtility::start();
     $page = $_GET['page'] ?? null;
     $page_size = $_GET['page_size'] ?? null;
     $validate= new Validator();
@@ -20,7 +23,9 @@ if( $request_method=='GET'){
         'page_size'=>$page_size,
     ];
     $result = $province_service->getProvinces($request_data);
-    Response::respondAndDie($result,Response::HTTP_OK);
+    echo Response::respond($result,Response::HTTP_OK);
+    CacheUtility::end();
+
 }
 
 

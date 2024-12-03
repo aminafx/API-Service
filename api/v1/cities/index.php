@@ -4,19 +4,20 @@ include "../../../autoloader.php";
 use App\Utilities\Response;
 use App\Services\CityService;
 use App\Services\Validator;
+use App\Utilities\CacheUtility;
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
 # GET METHOD
 if ($request_method == 'GET') {
 
-
+    CacheUtility::start();
     $province_id = $_GET['province_id'] ?? null;
     $page = $_GET['page'] ?? null;
     $page_size = $_GET['page_size'] ?? null;
     $validate = new Validator();
         if (!$validate->cityGetRequestValidation($_GET)) {
-            Response::respondAndDie("Province Not Found", Response::HTTP_NOT_FOUND);
+            Response::respondAndDie("Request Gone Wrong", Response::HTTP_NOT_FOUND);
         }
     $request_data = [
         'province_id' => $province_id,
@@ -25,9 +26,9 @@ if ($request_method == 'GET') {
     ];
     $city_service = new CityService();
     $result = $city_service->getCities($request_data);
-    Response::respondAndDie($result, Response::HTTP_OK);
+   echo Response::respond($result, Response::HTTP_OK);
 
-
+    CacheUtility::end();
 # POST METHOD
 } elseif ($request_method == 'POST') {
     $data = (array)json_decode(file_get_contents('php://input'));

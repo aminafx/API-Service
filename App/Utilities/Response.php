@@ -22,7 +22,7 @@ class Response
     }
 
 
-    public static function setHeaders($status_code)
+    public static function setHeaders($status_code = self::HTTP_OK)
     {
         header('Content-type: application/json; charset=UTF-8');
         header('Access-Control-Allow-Origin: *');

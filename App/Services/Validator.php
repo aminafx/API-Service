@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+
 class Validator
 {
     public function is_valid_province($province_id): bool
@@ -44,7 +45,6 @@ class Validator
         $stmt = $pdo->prepare($sql);
         $stmt->execute([':city_id' => $city_id]);
         $result = $stmt->fetch();
-        var_dump($stmt);
         return (bool)$result;
 
     }
@@ -82,7 +82,7 @@ class Validator
         }
     }
 
-    public function cityGetRequestValidation($data)
+    public function cityGetRequestValidation($data): ?bool
     {
 
         $province_id = $data['province_id'] ?? null;
@@ -91,7 +91,6 @@ class Validator
 
 
         if (!empty($data)) {
-
             if (isset($province_id) or !empty($province_id)) {
 
                 if ($this->is_valid_province($province_id)) {
@@ -112,7 +111,7 @@ class Validator
 
     }
 
-    public function cityPostRequestValidation($data)
+    public function cityPostRequestValidation($data):bool
     {
         if (!empty($data)) {
             $province_id = $data['province_id'];
@@ -130,7 +129,7 @@ class Validator
         }
     }
 
-    public function cityPutRequestValidation($data)
+    public function cityPutRequestValidation($data):bool
     {
         if (!empty($data)) {
             $city_id = $data['city_id'];
@@ -148,7 +147,7 @@ class Validator
         }
     }
 
-    public function cityDeleteRequestValidation($city_id)
+    public function cityDeleteRequestValidation($city_id):bool
     {
 
         if ($city_id != null) {
@@ -167,14 +166,14 @@ class Validator
         }
     }
 
-    public function provincePostRequestValidation($name)
+    public function provincePostRequestValidation($name):bool
     {
         if (!empty($name)) {
             return $this->is_valid_name($name);
         }
     }
 
-    public function provincePutRequestValidation($data)
+    public function provincePutRequestValidation($data):bool
     {
         if (!$data == null) {
             $province_id = $data['province_id'];
@@ -197,7 +196,7 @@ class Validator
 
     }
 
-    public function provinceDeleteRequestValidation($province_id)
+    public function provinceDeleteRequestValidation($province_id):bool
     {
 
         if ($province_id != null) {

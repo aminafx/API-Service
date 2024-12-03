@@ -6,6 +6,11 @@ try {
 } catch (PDOException $e) {
     die('Connection failed: ' . $e->getMessage());
 }
+function dd($var)
+{
+    var_dump($var);
+    die();
+}
 
 #==============  Simple Validators  ================
 function isValidCity($data)
